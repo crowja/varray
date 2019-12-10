@@ -1,7 +1,7 @@
 /**
  *  @file varray.c
  *  @version 0.1.0-dev0
- *  @date Wed Nov 27 18:50:23 CST 2019
+ *  @date Tue Dec 10 12:06:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -28,8 +28,6 @@ struct varray {
    void      **x;
 };
 
-/*** varray_new() ***/
-
 struct varray *
 varray_new(void)
 {
@@ -47,16 +45,12 @@ varray_new(void)
    return tp;
 }
 
-/*** varray_free() ***/
-
 void
-varray_free(struct varray *p)
+varray_free(struct varray **pp)
 {
-   _FREE(p->x);
-   _FREE(p);
+   _FREE((*pp)->x);
+   _FREE(*pp);
 }
-
-/*** varray_init() ***/
 
 int
 varray_init(struct varray *p, void *x)
@@ -68,15 +62,11 @@ varray_init(struct varray *p, void *x)
    return 0;
 }
 
-/*** varray_version() ***/
-
 const char *
 varray_version(void)
 {
    return "0.1.0-dev0";
 }
-
-/** varray_get() ***/
 
 void       *
 varray_get(struct varray *p, unsigned idx)
@@ -86,9 +76,6 @@ varray_get(struct varray *p, unsigned idx)
    else
       return NULL;
 }
-
-/*** varray_insert() ***/
-
 
 int
 varray_insert(struct varray *p, void *e)
@@ -114,8 +101,6 @@ varray_insert(struct varray *p, void *e)
 
    return 0;
 }
-
-/** varray_len() ***/
 
 unsigned
 varray_len(struct varray *p)

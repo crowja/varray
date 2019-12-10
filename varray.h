@@ -1,7 +1,7 @@
 /**
  *  @file varray.h
  *  @version 0.1.0-dev0
- *  @date Wed Nov 27 18:50:23 CST 2019
+ *  @date Tue Dec 10 12:06:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -29,7 +29,7 @@ struct varray *varray_new(void);
  *  @details FIXME longer description here ...
  */
 
-void        varray_free(struct varray *p);
+void        varray_free(struct varray **pp);
 
 /**
  *  @brief Initialize a varray object.
