@@ -57,28 +57,28 @@ test_constr(void)
 {
    struct varray *z;
 
-   _printf_test_name("test_constr()", "varray_new, varray_free");
+   _printf_test_name("test_constr", "varray_new, varray_free");
 
    z = varray_new();
    ASSERT("Constructor test", z);
-   varray_free(z);
-
+   varray_free(&z);
 }
 
-#if 0                                            /* 14 yy */
+#if 0                                            /* 15 yy */
 static void
 test_stub(void)
 {
    struct varray *z;
    double      x = 1.23;                    /* TODO */
 
-   _printf_test_name("test_stub()", NULL);
+   _printf_test_name("test_stub", NULL);
 
    z = varray_new();
    ASSERT("Constructor test, pt 1", z);
    ASSERT("Here's a test ...", _two_doubles_equal(x, 1.23));
 
-   varray_free(z);
+   varray_free(&z);
+   ASSERT_EQUALS(NULL, z);
 }
 #endif
 
