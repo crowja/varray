@@ -1,6 +1,6 @@
 /**
  *  @file varray.h
- *  @version 0.1.0-dev0
+ *  @version 0.2.0-dev0
  *  @date Tue Dec 10 12:06:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME

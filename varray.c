@@ -1,6 +1,6 @@
 /**
  *  @file varray.c
- *  @version 0.1.0-dev0
+ *  @version 0.2.0-dev0
  *  @date Tue Dec 10 12:06:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
@@ -65,7 +65,7 @@ varray_init(struct varray *p, void *x)
 const char *
 varray_version(void)
 {
-   return "0.1.0-dev0";
+   return "0.2.0-dev0";
 }
 
 void       *
