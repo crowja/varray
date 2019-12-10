@@ -23,6 +23,6 @@ main(int argc, char *argv[])
       free(cp);
    }
 
-   varray_free(p);
+   varray_free(&p);
    return 0;
 }
