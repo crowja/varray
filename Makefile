@@ -1,6 +1,7 @@
 SHELL = /bin/sh
 
 GCC_STRICT_FLAGS = -pedantic -ansi -W -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -O2
+GCC_SANITIZE_FLAGS = -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
 OTHER_SOURCE =
 OTHER_INCLUDE = -I.
 CPPFLAGS = -I. $(OTHER_INCLUDE)
@@ -20,43 +21,53 @@ EXAMPLES = ex/ex_1
 varray.o: varray.c varray.h
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ varray.c
 
-check: varray.o
+check:
 	@for i in $(TESTS); \
 	do \
 	  echo "--------------------"; \
 	  echo "Running test $$i ..."; \
 	  ( $(CC)    $(CPPFLAGS) $(OTHER_INCLUDE) $(CFLAGS) $(OTHER_SOURCE) \
-		-o t/a.out $$i.c varray.o $(LDFLAGS) ) \
+		-o t/a.out $$i.c varray.c $(LDFLAGS) ) \
 	  && ( t/a.out ); \
 	done 
 
-check-examples: varray.o
+check-examples:
 	@for i in $(EXAMPLES); \
 	do \
 	  echo "--------------------"; \
 	  echo "Running example $$i ..."; \
 	  ( $(CC) -g $(CPPFLAGS) $(OTHER_INCLUDE) $(CFLAGS) $(OTHER_SOURCE) \
-		-o ex/a.out $$i.c varray.o $(LDFLAGS) ) \
+		-o ex/a.out $$i.c varray.c $(LDFLAGS) ) \
 	  && ( valgrind $(VALGRIND_FLAGS) ex/a.out ); \
 	done 
 
-vcheck: varray.o
+vcheck:
 	@for i in $(TESTS); \
 	do \
 	  echo "--------------------"; \
 	  echo "Running test $$i ..."; \
 	  ( $(CC) -g $(CPPFLAGS) $(OTHER_INCLUDE) $(CFLAGS) $(OTHER_SOURCE) \
-		-o t/a.out $$i.c varray.o $(LDFLAGS) ) \
+		-o t/a.out $$i.c varray.c $(LDFLAGS) ) \
 	  && ( valgrind $(VALGRIND_FLAGS) t/a.out ); \
 	done 
 
-echeck: varray.o
+scheck:
+	@for i in $(TESTS); \
+	do \
+	  echo "--------------------"; \
+	  echo "Running test $$i ..."; \
+	  ( $(CC) -g $(CPPFLAGS) $(OTHER_INCLUDE) $(CFLAGS) $(GCC_SANITIZE_FLAGS) $(OTHER_SOURCE) \
+		-o t/a.out $$i.c varray.c $(LDFLAGS) ) \
+	  && ( t/a.out ); \
+	done 
+
+echeck:
 	@for i in $(TESTS); \
 	do \
 	  echo "--------------------"; \
 	  echo "Running test $$i ..."; \
 	  ( $(CC)    $(CPPFLAGS) $(OTHER_INCLUDE) $(CFLAGS) $(OTHER_SOURCE) \
-		-o t/a.out $$i.c varray.o $(LDFLAGS_EFENCE) ) \
+		-o t/a.out $$i.c varray.c $(LDFLAGS_EFENCE) ) \
 	  && ( LD_PRELOAD=libefence.so ./t/a.out ); \
 	done 
 
