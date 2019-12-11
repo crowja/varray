@@ -62,6 +62,7 @@ test_constr(void)
    z = varray_new();
    ASSERT("Constructor test", z);
    varray_free(&z);
+   ASSERT_EQUALS(NULL, z);
 }
 
 #if 0                                            /* 15 yy */

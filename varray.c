@@ -50,6 +50,7 @@ varray_free(struct varray **pp)
 {
    _FREE((*pp)->x);
    _FREE(*pp);
+   *pp = NULL;
 }
 
 int
