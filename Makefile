@@ -78,8 +78,8 @@ indent: stamp
 	@indent $(INDENT_FLAGS) ex/ex_1.c
 
 stamp:
-	@bash stamper.bash varray.c
-	@bash stamper.bash varray.h
+	@stamper.bash varray.c
+	@stamper.bash varray.h
 
 clean:
 	@/bin/rm -f *.o *~ *.BAK *.bak core.*
