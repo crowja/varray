@@ -1,8 +1,8 @@
 /**
  *  @file varray.c
  *  @version 0.3.0-dev0
- *  @date Tue Dec 10 12:06:00 CST 2019
- *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @date Sun Feb 16, 2020 07:24:22 PM CST
+ *  @copyright 2018-2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
  */
 
@@ -10,15 +10,15 @@
 #include <stdio.h>
 #include "varray.h"
 
-#ifdef  _IS_NULL
-#undef  _IS_NULL
+#ifdef  IS_NULL
+#undef  IS_NULL
 #endif
-#define _IS_NULL(p)   ((NULL == (p)) ? (1) : (0))
+#define IS_NULL(p)   ((NULL == (p)) ? (1) : (0))
 
-#ifdef  _FREE
-#undef  _FREE
+#ifdef  FREE
+#undef  FREE
 #endif
-#define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
+#define FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
 struct varray {
    unsigned    size;
@@ -33,7 +33,7 @@ varray_new(void)
    struct varray *tp;
 
    tp = (struct varray *) malloc(sizeof(struct varray));
-   if (_IS_NULL(tp))
+   if (IS_NULL(tp))
       return NULL;
 
    tp->size = 0;
@@ -47,8 +47,8 @@ varray_new(void)
 void
 varray_free(struct varray **pp)
 {
-   _FREE((*pp)->x);
-   _FREE(*pp);
+   FREE((*pp)->x);
+   FREE(*pp);
    *pp = NULL;
 }
 
@@ -83,7 +83,7 @@ varray_insert(struct varray *p, void *e)
    if (p->len == p->size) {                      /* extend? */
       unsigned    need = p->len + p->extend;
       void      **tmp = realloc(p->x, need * sizeof(void *));
-      if (_IS_NULL(tmp))                         /* FIXME */
+      if (IS_NULL(tmp))                          /* FIXME */
          exit(1);
       p->x = tmp;
       p->size = need;
@@ -109,5 +109,5 @@ varray_len(struct varray *p)
 }
 
 
-#undef  _IS_NULL
-#undef  _FREE
+#undef  IS_NULL
+#undef  FREE
