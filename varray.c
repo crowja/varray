@@ -21,10 +21,10 @@
 #define FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
 struct varray {
-   unsigned    size;
-   unsigned    len;
-   unsigned    extend;
-   void      **x;
+   unsigned  size;
+   unsigned  len;
+   unsigned  extend;
+   void    **x;
 };
 
 struct varray *
@@ -52,6 +52,21 @@ varray_free(struct varray **pp)
    *pp = NULL;
 }
 
+const char *
+varray_version(void)
+{
+   return "0.3.0-dev0";
+}
+
+void     *
+varray_get(struct varray *p, unsigned idx)
+{
+   if (idx < p->len)
+      return (p->x)[idx];
+   else
+      return NULL;
+}
+
 int
 varray_init(struct varray *p, void *x)
 {
@@ -62,27 +77,12 @@ varray_init(struct varray *p, void *x)
    return 0;
 }
 
-const char *
-varray_version(void)
-{
-   return "0.3.0-dev0";
-}
-
-void       *
-varray_get(struct varray *p, unsigned idx)
-{
-   if (idx < p->len)
-      return (p->x)[idx];
-   else
-      return NULL;
-}
-
 int
 varray_insert(struct varray *p, void *e)
 {
    if (p->len == p->size) {                      /* extend? */
-      unsigned    need = p->len + p->extend;
-      void      **tmp = realloc(p->x, need * sizeof(void *));
+      unsigned  need = p->len + p->extend;
+      void    **tmp = realloc(p->x, need * sizeof(void *));
       if (IS_NULL(tmp))                          /* FIXME */
          exit(1);
       p->x = tmp;
@@ -93,7 +93,7 @@ varray_insert(struct varray *p, void *e)
    p->len += 1;
 
    {
-      unsigned    i;
+      unsigned  i;
       for (i = 0; i < p->len; i++)
          printf("%d--%p\n", i, (p->x)[i]);
    }

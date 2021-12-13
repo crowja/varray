@@ -21,7 +21,7 @@ struct varray *varray_new(void);
  *  @brief Clean up and free a varray structure.
  *  @details FIXME longer description here ...
  */
-void        varray_free(struct varray **pp);
+void      varray_free(struct varray **pp);
 
 /**
  *  @brief Initialize a varray object.
@@ -29,7 +29,7 @@ void        varray_free(struct varray **pp);
  *  @param p Pointer to a varray object
  *  @param x FIXME
  */
-int         varray_init(struct varray *p, void *x);
+int       varray_init(struct varray *p, void *x);
 
 /**
  *  @brief Return the version of this package.
@@ -37,8 +37,8 @@ int         varray_init(struct varray *p, void *x);
  */
 const char *varray_version(void);
 
-void       *varray_get(struct varray *p, unsigned idx);
-int         varray_insert(struct varray *p, void *e);
-unsigned    varray_len(struct varray *p);
+void     *varray_get(struct varray *p, unsigned idx);
+int       varray_insert(struct varray *p, void *e);
+unsigned  varray_len(struct varray *p);
 
 #endif
