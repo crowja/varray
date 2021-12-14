@@ -47,7 +47,7 @@ printf_test_name(char *name, char *info)
 static int
 two_doubles_equal(double x, double y)
 {
-   double      t = fabs(x) + fabs(y);
+   double    t = fabs(x) + fabs(y);
    return fabs(x - y) < 4 * DBL_EPSILON * t ? 1 : 0;
 }
 
@@ -65,12 +65,67 @@ test_constr(void)
    ASSERT_EQUALS(NULL, z);
 }
 
+static void
+test_all(void)
+{
+   unsigned  i;
+   unsigned  nums = 200000;
+   struct varray *z;
+
+   printf_test_name("test_all", "varray_new, varray_free");
+
+   z = varray_new();
+   ASSERT("Constructor test", z);
+
+   for (i = 0; i < nums; i++) {
+      /* TODO */
+      int      *nump = (int *) malloc(sizeof(int));
+      *nump = i + 3141;
+      varray_insert(z, nump);
+   }
+
+   ASSERT_EQUALS(nums, varray_len(z));
+
+   for (i = 0; i < varray_len(z); i++) {
+      int       n = i + 3141;
+      ASSERT_EQUALS(n, *(int *) varray_get(z, i));
+   }
+
+   for (i = 0; i < nums; i++)
+      free(varray_get(z, i));
+
+   varray_reset(z);
+   ASSERT_EQUALS(0, varray_len(z));
+
+   for (i = 0; i < nums; i++) {
+      int      *nump = (int *) malloc(sizeof(int));
+      *nump = -i;
+      varray_insert(z, nump);
+   }
+
+   ASSERT_EQUALS(nums, varray_len(z));
+
+   for (i = 0; i < varray_len(z); i++) {
+      int       n = -i;
+      ASSERT_EQUALS(n, *(int *) varray_get(z, i));
+   }
+
+   for (i = 0; i < nums; i++)
+      free(varray_get(z, i));
+
+   varray_reset(z);
+   ASSERT_EQUALS(0, varray_len(z));
+
+   varray_free(&z);
+   ASSERT_EQUALS(NULL, z);
+}
+
 #if 0                                            /* 15 yy */
 static void
 test_stub(void)
 {
    struct varray *z;
-   double      x = 1.23;                    /* TODO */
+   double    x = 1.23;                      /* TODO */
 
    printf_test_name("test_stub", NULL);
 
@@ -90,6 +145,7 @@ main(void)
    printf("%s\n", varray_version());
 
    RUN(test_constr);
+   RUN(test_all);
 
    return TEST_REPORT();
 }
