@@ -17,7 +17,7 @@ INDENT_FLAGS = -TFILE -Tsize_t -Tuint8_t -Tuint16_t -Tuint32_t -Tuint64_t
 .PHONY: check check-examples vcheck echeck indent stamp clean
 
 TESTS = t/test
-EXAMPLES = ex/ex_1
+EXAMPLES = ex/ex01
 
 varray.o: varray.c varray.h
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ varray.c
@@ -76,7 +76,7 @@ indent:
 	@indent $(INDENT_FLAGS) varray.c
 	@indent $(INDENT_FLAGS) varray.h
 	@indent $(INDENT_FLAGS) t/test.c
-	@indent $(INDENT_FLAGS) ex/ex_1.c
+	@indent $(INDENT_FLAGS) ex/ex01.c
 
 stamp:
 	@$(STAMPER) varray.c
