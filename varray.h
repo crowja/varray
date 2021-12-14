@@ -1,6 +1,6 @@
 /**
  *  @file varray.h
- *  @version 0.3.0-dev0
+ *  @version 0.3.1-dev0
  *  @date Sun Feb 16, 2020 07:24:22 PM CST
  *  @copyright 2018-2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
