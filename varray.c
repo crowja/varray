@@ -92,11 +92,13 @@ varray_insert(struct varray *p, void *e)
    (p->x)[p->len] = e;
    p->len += 1;
 
-   {
+   /*
+      {
       unsigned  i;
       for (i = 0; i < p->len; i++)
-         printf("%d--%p\n", i, (p->x)[i]);
-   }
+      printf("%d--%p\n", i, (p->x)[i]);
+      }
+    */
 
 
    return 0;
@@ -106,6 +108,12 @@ unsigned
 varray_len(struct varray *p)
 {
    return p->len;
+}
+
+void
+varray_reset(struct varray *p)
+{
+   p->len = 0;
 }
 
 

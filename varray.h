@@ -40,5 +40,7 @@ const char *varray_version(void);
 void     *varray_get(struct varray *p, unsigned idx);
 int       varray_insert(struct varray *p, void *e);
 unsigned  varray_len(struct varray *p);
+void      varray_reset(struct varray *p);
+
 
 #endif
